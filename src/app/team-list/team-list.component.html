@@ -1,3 +1,51 @@
-<p>
-  team-list works!
-</p>
+<div class="container mt-1 ">
+  <div class="">
+    <div class="">
+      <div class="card">
+        <div class="card-body title">
+          <h3>Team</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<table mat-table [dataSource]="playersList" class="mat-elevation-z8">
+  
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Posicion </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef> Rating </th>
+    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef> Numero </th>
+    <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon  class="delete" fontIcon="delete"></mat-icon>
+      <mat-icon  class="edit" fontIcon="edit"></mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!--<mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>-->
