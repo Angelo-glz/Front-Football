@@ -1,3 +1,76 @@
-<p>
-  add-edit-player works!
-</p>
+<div class="title">
+  <h1>Agregar Jugador</h1>
+</div>
+<div class="container">
+  <mat-card class="card">
+    <mat-card-subtitle>
+
+    </mat-card-subtitle>
+    <form [formGroup]="form" (ngSubmit)="addEditPlayer()" >
+      <mat-grid-list cols="2" rowHeight="20vh">
+        <mat-grid-tile [colspan]="2">
+           <div class="example-container">
+             <mat-form-field appearance="fill">
+               <mat-label>Nombre</mat-label>
+               <input formControlName="name" matInput placeholder="Luis Alberto Suarez"required>
+               <mat-error></mat-error>
+             </mat-form-field>
+           </div>
+           <div class="example-container">
+             <mat-form-field appearance="fill">
+               <mat-label>Dorsal</mat-label>
+               <input formControlName="number" matInput placeholder="9"required>
+               <mat-error></mat-error>
+             </mat-form-field>
+           </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Ready">Listo</mat-option>
+              <mat-option value="Injured">Lesionado</mat-option>
+              <mat-option value="Red card">Expulsion</mat-option>
+              <mat-option value="Other">Otro</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Rating</mat-label>
+            <mat-select formControlName="rating">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+              <mat-option value="6">6</mat-option>
+              <mat-option value="7">7</mat-option>
+              <mat-option value="8">8</mat-option>
+              <mat-option value="9">9</mat-option>
+              <mat-option value="10">10</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Posicion</mat-label>
+            <mat-select formControlName="position">
+              <mat-option value="Golero">Golero</mat-option>
+              <mat-option value="Defensa">Defensa</mat-option>
+              <mat-option value="Mediocampista">Mediocampista</mat-option>
+              <mat-option value="Delantero">Delantero</mat-option>
+              <mat-option value="DT">DT</mat-option>
+              <mat-option value="Medico">Medico</mat-option>
+              <mat-option value="Asistente/Staff">Asistente/Staff</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button style="margin-right: 10px;" mat-raised-button color="primary">Agregar Jugador</button>
+          <button [routerLink]="['/playersList']" mat-raised-button>Volver</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card>
+</div>

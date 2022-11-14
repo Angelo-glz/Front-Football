@@ -2,38 +2,20 @@
 {
   cursor: pointer;
 }
-
 .edit{
   cursor: pointer;
   color: #3887e0
 }
-
 .delete{
   cursor: pointer;
   color: #dc3545
 }
-
 .box {
   width: 100%;
   border: 10px solid #007092;
 }
-
-.pitch {
-  background-image: url(https://i.pinimg.com/originals/af/b9/10/afb9101577d749b22e01ff13d32f5f9e.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 100vh;
-}
-
-.dot{
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-
-}
-
 table{
-  width: 100%;
+  margin-left: 15vh;
+  position: center;
+  width: 80%;
 }
