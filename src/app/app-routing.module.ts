@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'playersList', component: TeamListComponent },
   { path: 'addPlayer', component: AddEditPlayerComponent },
   { path: 'editPlayer/:id', component: AddEditPlayerComponent },
-  { path: 'editTeam', component: EditTeamComponent}
+  { path: 'editTeam', component: EditTeamComponent},
+  { path: '**', redirectTo: 'playersList', pathMatch: 'full'}
 ];
 
 @NgModule({
