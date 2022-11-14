@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Player } from 'src/app/interfaces/player';
 import { PlayerService } from 'src/app/services/player.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -11,29 +12,30 @@ import { PlayerService } from 'src/app/services/player.service';
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.css']
 })
-export class TeamListComponent implements OnInit, AfterViewInit {
+export class TeamListComponent implements OnInit {
   playersList: Player[] = [];
   displayedColumns: string[] = ['name', 'number', 'rating', 'position', 'status', 'actions'];
   dataSource = new MatTableDataSource<Player>();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator
-
-  constructor(private _playerService:PlayerService) { }
+  constructor(private _playerService:PlayerService,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit() {
     this.getPlayers();
   }
 
-  ngAfterViewInit(){
-    this.dataSource.paginator = this.paginator;
-    //this.paginator._intl.itemsPerPageLabel = 'Jugadores por pagina:'
-  }
-
   getPlayers(){
     this._playerService.getPlayers().subscribe(data => {
-      console.log(data);
       this.playersList = data;
     }, error =>{console.log(error);})
+  }
+
+  deletePlayer(id: number){
+    this._playerService.deletePlayer(id).subscribe(data =>{
+      this.toastr.success('Jugador eliminado.','Jugador eliminado con exito.');
+      this.getPlayers();
+    },error =>{this.toastr.error('Error al eliminar el jugador.', 'Intentelo nuevamente.')});
   }
 
 

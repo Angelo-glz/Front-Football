@@ -42,8 +42,8 @@
       <button [routerLink]="['/addPlayer']" mat-raised-button color="primary">Agregar</button>
     </th>
     <td mat-cell *matCellDef="let element">
-      <mat-icon routerLink="/" class="delete" fontIcon="delete"></mat-icon>
-      <mat-icon [routerLink]="['/editPlayer/']" class="edit" fontIcon="edit"></mat-icon>
+      <mat-icon (click)="deletePlayer(element.id)" class="delete" fontIcon="delete"></mat-icon>
+      <mat-icon routerLink="/editPlayer/{{ element.id }}" class="edit" fontIcon="edit"></mat-icon>
     </td>
   </ng-container>
 

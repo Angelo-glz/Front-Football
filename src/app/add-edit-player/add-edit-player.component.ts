@@ -4,6 +4,7 @@ import { Player } from '../interfaces/player';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrService } from 'ngx-toastr';
 import { PlayerService } from '../services/player.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,12 +14,13 @@ import { PlayerService } from '../services/player.service';
 })
 export class AddEditPlayerComponent implements OnInit {
   form: FormGroup;
-  id: number | undefined;
-  state = 'Add';
+  id: number;
+  state = 'Agregar';
 
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private _playerService: PlayerService) {
+    private _playerService: PlayerService,
+    private activatedRoute: ActivatedRoute) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
@@ -26,10 +28,27 @@ export class AddEditPlayerComponent implements OnInit {
       position: ['', Validators.required],
       number: ['', Validators.required]
     })
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'))
   }
 
   ngOnInit() {
+    if(this.id != 0){
+      this.state = 'Editar'
+      this.getPlayer(this.id);
+    }
   }
+
+  getPlayer(id: number){
+    this._playerService.getPlayer(id).subscribe(data =>{
+      this.form.patchValue({
+        name: data.name,
+        position: data.position,
+        status: data.status,
+        number: data.number,
+        rating: data.rating
+      });
+    });
+  };
 
   addEditPlayer(){
     const player: Player = {
@@ -39,23 +58,31 @@ export class AddEditPlayerComponent implements OnInit {
       number: this.form.get('number')?.value,
       rating: this.form.get('rating')?.value
     };
-
-    if(this.id == undefined){
-      this._playerService.addPlayer(player).subscribe(data => {
-        this.toastr.success('Creacion exitosa de jugador','Jugador agregado.');
-        this.form.reset();
-      }, error =>{
-        this.toastr.error('Algo salio mal, intenta de nuevo.', 'El jugador no pudo ser agregado.')
-      })
+    if(this.id != 0){
+      player.id = this.id;
+      this.updatePlayer(player);
     }else{
-      this._playerService.updatePlayer(this.id, player).subscribe(data =>{
-        this.form.reset();
-        this.state = 'Add';
-        this.id = undefined;
-        this.toastr.info('Jugador actualizado con exito.', 'Jugador actualizado.');
-
-      },error =>{
-        this.toastr.error('Algo salio mal, intenta de nuevo.','El jugador no pudo ser actualizado.');
-      })
+      this.addPlayer(player);
   }};
+
+  addPlayer(player: Player){
+    this._playerService.addPlayer(player).subscribe(data => {
+      this.toastr.success('Creacion exitosa de jugador','Jugador agregado.');
+      this.form.reset();
+    }, error =>{
+      this.toastr.error('Algo salio mal, intenta de nuevo.', 'El jugador no pudo ser agregado.')
+    });
+  };
+
+  updatePlayer(player: Player){
+    this._playerService.updatePlayer(this.id, player).subscribe(() => {
+      this.form.reset();
+      this.state = 'Add';
+      this.id = 0;
+      this.toastr.info('Jugador actualizado con exito.', 'Jugador actualizado.');
+    },error =>{
+      this.toastr.error('Algo salio mal, intenta de nuevo.','El jugador no pudo ser actualizado.');
+    });
+  };
+
 }

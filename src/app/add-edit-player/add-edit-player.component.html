@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Agregar Jugador</h1>
+  <h1>{{state}} Jugador</h1>
 </div>
 <div class="container">
   <mat-card class="card">
@@ -28,10 +28,10 @@
           <mat-form-field appearance="fill">
             <mat-label>Estado</mat-label>
             <mat-select formControlName="status">
-              <mat-option value="Ready">Listo</mat-option>
-              <mat-option value="Injured">Lesionado</mat-option>
-              <mat-option value="Red card">Expulsion</mat-option>
-              <mat-option value="Other">Otro</mat-option>
+              <mat-option value="Listo">Listo</mat-option>
+              <mat-option value="lesionado">Lesionado</mat-option>
+              <mat-option value="Expulsion">Expulsion</mat-option>
+              <mat-option value="Otro">Otro</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
