@@ -16,6 +16,8 @@ import { SharedModule } from './shared/shared.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     MatButtonModule,
     ToastrModule.forRoot(),
-    SharedModule
+    SharedModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

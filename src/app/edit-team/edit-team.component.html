@@ -1,6 +1,101 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+<div class="title">
+  <h1>Editar Equipo</h1>
+</div>
+<div class="container">
+
+<div class="container">
+  <mat-grid-list cols="4" rowHeight="80vh">
+    <mat-grid-tile>
+      <div class="example-boundary">
+        <div class="example-box gk" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="example-boundary">
+        <div class="example-box cb-1" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box cb-2" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box cb-3" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box cb-4" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box cb-5" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="example-boundary">
+        <div class="example-box mf-1" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box mf-2" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box mf-3" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box mf-4" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box mf-5" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="example-boundary">
+        <div class="example-box fw-1" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box fw-2" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box fw-3" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box fw-4" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+        <div class="example-box fw-5" cdkDragBoundary=".example-boundary" cdkDrag>
+          Mbappe
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div>
+  <div class="dd-container">
+    <h2>Equipo</h2>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="players"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="dd-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="drag-drop" *ngFor="let item of players" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="dd-container">
+    <h2>Titulares</h2>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="starting"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="dd-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="drag-drop" *ngFor="let item of starting" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+</div>

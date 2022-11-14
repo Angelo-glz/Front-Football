@@ -1,13 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+html{
   background: #2193b0;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .title{
-  font-family: 'Inter', sans-serif !important;
-  font-family: 'Ubuntu', sans-serif !important;
+  font-family: 'Inter', sans-serif ;
+  font-family: 'Ubuntu', sans-serif ;
   text-align: center;
   padding: 30px;
   background-color: rgba(102, 102, 102, 0.342);
