@@ -1,3 +1,4 @@
+<div #content id="main">
 <div class="title">
   <h1>Editar Equipo</h1>
 </div>
@@ -6,96 +7,111 @@
 <div class="container">
   <mat-grid-list cols="4" rowHeight="80vh">
     <mat-grid-tile>
-      <div class="example-boundary">
-        <div class="example-box gk" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
+      <div class="pitch-boundary">
+        <ng-container *ngFor="let player of starting">
+          <div *ngIf="player.position == 'Golero'" class="pitch-box" cdkDragBoundary=".pitch-boundary" cdkDrag>
+            {{player.name}} - {{player.number}} - {{player.status}}
+          </div>
+        </ng-container>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <div class="example-boundary">
-        <div class="example-box cb-1" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box cb-2" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box cb-3" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box cb-4" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box cb-5" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
+      <div class="pitch-boundary">
+        <ng-container *ngFor="let player of starting">
+          <div *ngIf="player.position == 'Defensa'" class="pitch-box" cdkDragBoundary=".pitch-boundary" cdkDrag>
+            {{player.name}} - {{player.number}} - {{player.status}}
+          </div>
+        </ng-container>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <div class="example-boundary">
-        <div class="example-box mf-1" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box mf-2" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box mf-3" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box mf-4" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box mf-5" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
+      <div class="pitch-boundary">
+        <ng-container *ngFor="let player of starting">
+          <div *ngIf="player.position == 'Mediocampista'" class="pitch-box" cdkDragBoundary=".pitch-boundary" cdkDrag>
+            {{player.name}} - {{player.number}} - {{player.status}}
+          </div>
+        </ng-container>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <div class="example-boundary">
-        <div class="example-box fw-1" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box fw-2" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box fw-3" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box fw-4" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
-        <div class="example-box fw-5" cdkDragBoundary=".example-boundary" cdkDrag>
-          Mbappe
-        </div>
+      <div class="pitch-boundary">
+        <ng-container *ngFor="let player of starting">
+          <div *ngIf="player.position == 'Delantero'" class="pitch-box" cdkDragBoundary=".pitch-boundary" cdkDrag>
+            {{player.name}} - {{player.number}} - {{player.status}}
+          </div>
+        </ng-container>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+  <div class="container" *ngIf="subsAndStaff.length != 0">
+    <table mat-table [dataSource]="subsAndStaff" class="mat-elevation-z10">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Posicion </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef> Puntuacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <button [routerLink]="['/playersList']" mat-raised-button>Volver</button>
+  <button (click)="openPDF()" mat-raised-button color="accent">Generar Imagen</button>
+
 </div>
 
-<div>
-  <div class="dd-container">
-    <h2>Equipo</h2>
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="players"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="dd-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="drag-drop" *ngFor="let item of players" cdkDrag>{{item}}</div>
+<div class="container">
+  <div>
+    <div class="dd-container">
+      <h2>Equipo</h2>
+      <div
+        cdkDropList
+        #playersList="cdkDropList"
+        [cdkDropListData]="players"
+        [cdkDropListConnectedTo]="[teamList, benchList]"
+        class="dd-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="drag-drop" *ngFor="let player of players" cdkDrag>{{player.name}} - {{player.status}} - {{player.position}}</div>
+      </div>
     </div>
-  </div>
 
-  <div class="dd-container">
-    <h2>Titulares</h2>
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="starting"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="dd-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="drag-drop" *ngFor="let item of starting" cdkDrag>{{item}}</div>
+    <div class="dd-container">
+      <h2>Titulares - Max 11</h2>
+      <div
+        cdkDropList
+        #teamList="cdkDropList"
+        [cdkDropListData]="starting"
+        [cdkDropListEnterPredicate]="startingPredicate"
+        [cdkDropListConnectedTo]="[playersList, benchList]"
+        class="dd-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="drag-drop" *ngFor="let player of starting" cdkDrag>{{player.name}} - {{player.status}} - {{player.position}}</div>
+      </div>
+    </div>
+
+    <div class="dd-container">
+      <h2>Suplentes y Staff tecnico - Max 9</h2>
+      <div
+        cdkDropList
+        #benchList="cdkDropList"
+        [cdkDropListData]="subsAndStaff"
+        [cdkDropListEnterPredicate]="benchPredicate"
+        [cdkDropListConnectedTo]="[playersList, teamList]"
+        class="dd-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="drag-drop" *ngFor="let player of subsAndStaff" cdkDrag>{{player.name}} - {{player.status}} - {{player.position}}</div>
+      </div>
     </div>
   </div>
+</div>
 </div>
